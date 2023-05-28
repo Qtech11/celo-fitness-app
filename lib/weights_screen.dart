@@ -90,7 +90,6 @@ class _WeightScreenState extends ConsumerState<WeightScreen> {
               },
             ),
             Consumer(builder: (context, ref, child) {
-              final state = ref.watch(web3Provider);
               return TextButton(
                 child: ref.watch(web3Provider).addWeightStatus == Status.loading
                     ? const CircularProgressIndicator(
@@ -98,13 +97,11 @@ class _WeightScreenState extends ConsumerState<WeightScreen> {
                       )
                     : const Text('Add'),
                 onPressed: () {
-                  debugPrint(state.addWeightStatus.toString());
                   if (controller.text.trim().isNotEmpty) {
                     ref
                         .read(web3Provider)
                         .addWeight(int.parse(controller.text.trim()), context);
                   }
-                  debugPrint(state.addWeightStatus.toString());
                 },
               );
             }),

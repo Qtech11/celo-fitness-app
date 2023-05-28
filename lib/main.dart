@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -61,7 +60,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         unselectedItemColor: Colors.grey,
         showSelectedLabels: true,
         elevation: 12,
-        // type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         onTap: _onTapped,
       ),

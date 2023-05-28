@@ -89,7 +89,6 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
               },
             ),
             Consumer(builder: (context, ref, child) {
-              final state = ref.watch(web3Provider);
               return TextButton(
                 child:
                     ref.watch(web3Provider).addWorkoutStatus == Status.loading
@@ -98,13 +97,11 @@ class _WorkoutScreenState extends ConsumerState<WorkoutScreen> {
                           )
                         : const Text('Add'),
                 onPressed: () {
-                  debugPrint(state.addWorkoutStatus.toString());
                   if (controller.text.trim().isNotEmpty) {
                     ref
                         .read(web3Provider)
                         .addWorkOut(controller.text.trim(), context);
                   }
-                  debugPrint(state.addWorkoutStatus.toString());
                 },
               );
             }),

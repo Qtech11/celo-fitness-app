@@ -1,123 +1,15 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
 
 final client = Web3Client('https://alfajores-forno.celo-testnet.org', Client());
 
-const abi = [
-  {
-    "inputs": [
-      {"internalType": "uint256", "name": "_weight", "type": "uint256"}
-    ],
-    "name": "addWeightRecord",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {"internalType": "string", "name": "_name", "type": "string"}
-    ],
-    "name": "addWorkout",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getAllWeightRecords",
-    "outputs": [
-      {"internalType": "uint256[]", "name": "", "type": "uint256[]"},
-      {"internalType": "uint256[]", "name": "", "type": "uint256[]"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getAllWorkouts",
-    "outputs": [
-      {"internalType": "string[]", "name": "", "type": "string[]"},
-      {"internalType": "uint256[]", "name": "", "type": "uint256[]"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {"internalType": "uint256", "name": "_index", "type": "uint256"}
-    ],
-    "name": "getWeightRecord",
-    "outputs": [
-      {"internalType": "uint256", "name": "", "type": "uint256"},
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getWeightRecordCount",
-    "outputs": [
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {"internalType": "uint256", "name": "_index", "type": "uint256"}
-    ],
-    "name": "getWorkout",
-    "outputs": [
-      {"internalType": "string", "name": "", "type": "string"},
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getWorkoutCount",
-    "outputs": [
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {"internalType": "address", "name": "", "type": "address"},
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "name": "weightRecords",
-    "outputs": [
-      {"internalType": "uint256", "name": "weight", "type": "uint256"},
-      {"internalType": "uint256", "name": "timestamp", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {"internalType": "address", "name": "", "type": "address"},
-      {"internalType": "uint256", "name": "", "type": "uint256"}
-    ],
-    "name": "workouts",
-    "outputs": [
-      {"internalType": "string", "name": "name", "type": "string"},
-      {"internalType": "uint256", "name": "timestamp", "type": "uint256"}
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
-];
-// Replace these with your actual contract address and ABI
+const abi = '<your-contract-abi>';
+// Replace these with your actual contract ABI
 
-final contractAddress =
-    EthereumAddress.fromHex('0x5c247A852f7cf7586c9D7B3c290d18bfDe97CFD0');
+final contractAddress = EthereumAddress.fromHex(
+    '<your-contract-address>'); // replace with your actual contract address
 final contractABI = json.encode(abi);
 
 class Web3Helper {
@@ -127,9 +19,8 @@ class Web3Helper {
     contractAddress,
   );
 
-  // final credentials = await client.credentialsFromPrivateKey("<your-private-key>");
   final credentials = EthPrivateKey.fromHex(
-      "88093061c7ffd4701cd6c37532868e34043ad3f57ab3f2c08e1d290401b2a7b4");
+      "<your-private-key>"); // replace with your celo wallet private key
 
   Future addWorkout(String workOut) async {
     final addWorkoutFunction = contract.function('addWorkout');
@@ -157,7 +48,6 @@ class Web3Helper {
   }
 
   Future addWeight(int weight) async {
-    log('lets go.........');
     final addWeightFunction = contract.function('addWeightRecord');
     final responseAddWeight = await client.sendTransaction(
       credentials,
